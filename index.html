@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>보이스피싱 예방 안내 | 고양경찰서</title>
+  <meta name="description" content="보이스피싱 피해 예방을 위한 고양경찰서 공식 안내 페이지입니다." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== 기본 초기화 ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #f5f6fa;
+    }
+
+    /* ===== 공통 레이아웃 ===== */
+    .container { max-width: 480px; margin: 0 auto; }
+    section { padding: 32px 20px; }
+    h2 { font-size: 1.4rem; font-weight: 900; margin-bottom: 20px; }
+
+    /* ===== 1. 히어로 헤더 ===== */
+    #hero {
+      background: linear-gradient(160deg, #003087 0%, #0050c8 100%);
+      color: #fff;
+      padding: 40px 20px 36px;
+      text-align: center;
+    }
+    .police-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    .police-badge .shield { font-size: 1.1rem; }
+    #hero h1 {
+      font-size: 1.9rem;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      word-break: keep-all;
+    }
+    #hero h1 span { color: #FFD700; }
+    #hero .subtitle {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      margin-bottom: 24px;
+      word-break: keep-all;
+    }
+    .alert-box {
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 0.9rem;
+      text-align: left;
+      line-height: 1.7;
+    }
+    .alert-box strong { color: #FFD700; font-size: 1rem; }
+
+    /* ===== 2. 유형 카드 ===== */
+    #types { background: #fff; }
+    #types h2 { color: #003087; }
+    .type-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .tab-btn {
+      background: #e8edf5;
+      border: none;
+      border-radius: 20px;
+      padding: 7px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: #555;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .tab-btn.active {
+      background: #003087;
+      color: #fff;
+    }
+    .type-card {
+      display: none;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid #e0e4ee;
+    }
+    .type-card.active { display: block; }
+    .card-header {
+      padding: 18px 20px 14px;
+      background: #003087;
+      color: #fff;
+    }
+    .card-header .type-icon { font-size: 2.2rem; margin-bottom: 6px; }
+    .card-header .type-name {
+      font-size: 1.2rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .card-header .type-target {
+      font-size: 0.82rem;
+      background: rgba(255,255,255,0.2);
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+    .card-body { padding: 18px 20px; background: #fff; }
+    .fraud-quote {
+      background: #fff3f3;
+      border-left: 4px solid #e53935;
+      border-radius: 0 10px 10px 0;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #c62828;
+      word-break: keep-all;
+    }
+    .fraud-quote::before { content: "📞 사기 문구 예시"; display: block; font-size: 0.78rem; font-style: normal; font-weight: 700; margin-bottom: 6px; color: #e53935; }
+    .card-desc { font-size: 0.9rem; color: #444; margin-bottom: 14px; word-break: keep-all; line-height: 1.75; }
+    .card-tip {
+      background: #e8f4fd;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      color: #0d47a1;
+      font-weight: 700;
+      word-break: keep-all;
+    }
+    .card-tip::before { content: "💡 대처법 "; }
+
+    /* ===== 3. 자가진단 ===== */
+    #checklist { background: #f5f6fa; }
+    #checklist h2 { color: #003087; }
+    .checklist-intro {
+      font-size: 0.92rem;
+      color: #555;
+      margin-bottom: 20px;
+      word-break: keep-all;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      border: 2px solid #e0e4ee;
+      transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .check-item:active { transform: scale(0.98); }
+    .check-item.checked {
+      border-color: #2e7d32;
+      background: #f1f8e9;
+    }
+    .check-box {
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      border-radius: 6px;
+      border: 2px solid #bbb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: #fff;
+      transition: all 0.2s;
+    }
+    .check-item.checked .check-box {
+      background: #2e7d32;
+      border-color: #2e7d32;
+      color: #fff;
+    }
+    .check-text {
+      font-size: 0.92rem;
+      color: #333;
+      word-break: keep-all;
+      line-height: 1.6;
+      padding-top: 2px;
+    }
+    .check-item.checked .check-text { color: #2e7d32; }
+    .result-box {
+      margin-top: 20px;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1rem;
+      display: none;
+      word-break: keep-all;
+    }
+    .result-box.show { display: block; }
+    .result-box.danger { background: #ffebee; color: #b71c1c; border: 2px solid #ef9a9a; }
+    .result-box.warning { background: #fff8e1; color: #e65100; border: 2px solid #ffcc02; }
+    .result-box.safe { background: #e8f5e9; color: #1b5e20; border: 2px solid #a5d6a7; }
+    .result-score { font-size: 2rem; margin-bottom: 8px; }
+    .result-msg { font-size: 0.95rem; line-height: 1.65; font-weight: 500; }
+
+    /* ===== 4. 대처법 ===== */
+    #response { background: #fff; }
+    #response h2 { color: #b71c1c; }
+    .response-warning {
+      background: #ffebee;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 0.92rem;
+      color: #c62828;
+      font-weight: 700;
+      margin-bottom: 24px;
+      word-break: keep-all;
+      line-height: 1.6;
+    }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 52px;
+      width: 2px;
+      height: calc(100% - 20px);
+      background: #ddd;
+    }
+    .step-num {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+    .step:nth-child(1) .step-num { background: #e53935; }
+    .step:nth-child(2) .step-num { background: #f57c00; }
+    .step:nth-child(3) .step-num { background: #1565c0; }
+    .step:nth-child(4) .step-num { background: #2e7d32; }
+    .step-content { padding-bottom: 28px; flex: 1; }
+    .step-title { font-size: 1.05rem; font-weight: 900; margin-bottom: 4px; }
+    .step-desc { font-size: 0.88rem; color: #555; word-break: keep-all; line-height: 1.65; }
+    .step-urgent {
+      display: inline-block;
+      background: #e53935;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+    }
+
+    /* ===== 5. 연락처 ===== */
+    #contacts { background: #003087; color: #fff; }
+    #contacts h2 { color: #FFD700; }
+    .contact-grid { display: flex; flex-direction: column; gap: 10px; }
+    .contact-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 16px 18px;
+      text-decoration: none;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      transition: background 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .contact-card:active { background: rgba(255,255,255,0.2); }
+    .contact-left { display: flex; align-items: center; gap: 12px; }
+    .contact-icon { font-size: 1.6rem; }
+    .contact-name { font-size: 0.95rem; font-weight: 700; }
+    .contact-role { font-size: 0.78rem; opacity: 0.8; margin-top: 2px; }
+    .contact-num {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #FFD700;
+      letter-spacing: 0.05em;
+    }
+    .contact-card.emergency .contact-num { font-size: 1.8rem; color: #ff6b6b; }
+
+    /* ===== 6. 푸터 ===== */
+    footer {
+      background: #111827;
+      color: #9ca3af;
+      padding: 24px 20px;
+      text-align: center;
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+    footer strong { color: #f3f4f6; }
+    .footer-logo { font-size: 1.5rem; margin-bottom: 8px; }
+
+    /* ===== 스크롤 네비게이션 (상단 고정 메뉴) ===== */
+    #topnav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1.5px solid #e0e4ee;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+    #topnav::-webkit-scrollbar { display: none; }
+    .nav-inner { display: inline-flex; gap: 4px; padding: 8px 16px; }
+    .nav-btn {
+      background: none;
+      border: 1.5px solid #e0e4ee;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: #555;
+      font-family: inherit;
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .nav-btn:hover { background: #f0f4ff; color: #003087; border-color: #003087; }
+
+    /* ===== 애니메이션 ===== */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    .pulse { animation: pulse 2.5s infinite; }
+
+    /* ===== 반응형 (태블릿 이상) ===== */
+    @media (min-width: 600px) {
+      body { font-size: 17px; }
+      .container { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== 상단 빠른 네비 ===== -->
+<nav id="topnav">
+  <div class="nav-inner">
+    <a class="nav-btn" href="#types">📋 유형</a>
+    <a class="nav-btn" href="#checklist">✅ 자가진단</a>
+    <a class="nav-btn" href="#response">🚨 대처법</a>
+    <a class="nav-btn" href="#contacts">📞 신고</a>
+  </div>
+</nav>
+
+<!-- ===== 1. 히어로 ===== -->
+<header id="hero">
+  <div class="container">
+    <div class="police-badge">
+      <span class="shield">🛡️</span>
+      고양경찰서
+    </div>
+    <h1>보이스피싱,<br /><span>나도 당할 수 있습니다</span></h1>
+    <p class="subtitle">전화 한 통으로 전 재산을 잃을 수 있습니다.<br/>지금 바로 확인하고 가족을 지키세요.</p>
+    <div class="alert-box pulse">
+      <strong>⚠ 2025년 보이스피싱 피해액</strong><br />
+      전국 <strong>1조 566억 원</strong> — 사상 최초 1조 돌파<br />
+      하루 평균 약 <strong>35억 원</strong> 피해 발생
+    </div>
+  </div>
+</header>
+
+<!-- ===== 2. 보이스피싱 유형 ===== -->
+<section id="types">
+  <div class="container">
+    <h2>📋 주요 보이스피싱 유형 5가지</h2>
+    <!-- 탭 버튼 -->
+    <div class="type-tabs">
+      <button class="tab-btn active" onclick="showType(0)">① 기관사칭</button>
+      <button class="tab-btn" onclick="showType(1)">② 대출사기</button>
+      <button class="tab-btn" onclick="showType(2)">③ 메신저</button>
+      <button class="tab-btn" onclick="showType(3)">④ 악성앱</button>
+      <button class="tab-btn" onclick="showType(4)">⑤ 셀프감금</button>
+    </div>
+
+    <!-- 카드 0: 기관사칭형 -->
+    <div class="type-card active" id="type-0">
+      <div class="card-header">
+        <div class="type-icon">🏛️</div>
+        <div class="type-name">기관사칭형</div>
+        <div class="type-target">전 연령 주의</div>
+      </div>
+      <div class="card-body">
+        <div class="fraud-quote">
+          "검찰청 수사관입니다. 귀하의 계좌가 범죄에 이용되었습니다. 수사 협조를 위해 지금 즉시 안전계좌로 돈을 이체하셔야 합니다."
+        </div>
+        <p class="card-desc">
+          검찰청·경찰청·금융감독원·건강보험공단 등 정부기관을 사칭합니다. 공식 번호처럼 조작된 번호로 전화를 걸고, 개인정보 유출이나 범죄 연루를 빌미로 계좌이체를 유도합니다.
+        </p>
+        <div class="card-tip">
+          어떤 정부기관도 전화로 계좌이체를 요구하지 않습니다. 즉시 전화를 끊고 해당 기관에 직접 확인하세요.
+        </div>
+      </div>
+    </div>
+
+    <!-- 카드 1: 대출사기형 -->
+    <div class="type-card" id="type-1">
+      <div class="card-header">
+        <div class="type-icon">💳</div>
+        <div class="type-name">대출사기형</div>
+        <div class="type-target">40~60대 주의</div>
+      </div>
+      <div class="card-body">
+        <div class="fraud-quote">
+          "저금리 정부지원 대출이 가능합니다. 기존 대출금 먼저 상환하시면 더 좋은 조건으로 재대출해드리겠습니다."
+        </div>
+        <p class="card-desc">
+          저금리·정부지원 대출을 미끼로 접근합니다. 기존 대출 상환·수수료·보증금 명목으로 돈을 먼저 보내도록 유도한 뒤 연락을 끊습니다. 금융기관 직원을 사칭하기도 합니다.
+        </p>
+        <div class="card-tip">
+          먼저 돈을 보내야 대출이 된다는 말은 100% 사기입니다. 제도권 금융기관은 절대 선입금을 요구하지 않습니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- 카드 2: 메신저피싱형 -->
+    <div class="type-card" id="type-2">
+      <div class="card-header">
+        <div class="type-icon">💬</div>
+        <div class="type-name">메신저피싱형</div>
+        <div class="type-target">부모 세대 주의</div>
+      </div>
+      <div class="card-body">
+        <div class="fraud-quote">
+          "엄마, 나 지금 급하게 돈이 필요해. 휴대폰이 고장났는데 친구한테 빌린 폰으로 연락하는 거야. 100만 원만 이 계좌로 보내줘."
+        </div>
+        <p class="card-desc">
+          카카오톡·문자로 자녀·지인을 사칭해 급전을 요청합니다. 프로필 사진까지 도용해 속이며, 급한 상황을 연출해 확인할 틈을 주지 않으려 합니다.
+        </p>
+        <div class="card-tip">
+          반드시 자녀에게 직접 전화하여 본인 확인 후 송금하세요. 가족 간 확인 암호를 미리 정해두는 것이 효과적입니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- 카드 3: 악성앱 설치형 -->
+    <div class="type-card" id="type-3">
+      <div class="card-header">
+        <div class="type-icon">📱</div>
+        <div class="type-name">악성앱 설치형</div>
+        <div class="type-target">20~50대 주의</div>
+      </div>
+      <div class="card-body">
+        <div class="fraud-quote">
+          "택배 주소가 불명확합니다. 아래 링크에서 확인하세요." / "고객님 명의 대출 조회 앱입니다. 설치 후 신청하세요."
+        </div>
+        <p class="card-desc">
+          문자·카카오톡으로 링크를 보내 악성 앱(APK)을 설치하게 합니다. 설치 후 전화를 가로채고, 개인정보·금융정보를 탈취하며, 카메라·마이크까지 제어할 수 있습니다.
+        </p>
+        <div class="card-tip">
+          출처가 불명확한 링크는 절대 클릭하지 마세요. 앱은 공식 스토어(Play스토어·App Store)에서만 설치하세요.
+        </div>
+      </div>
+    </div>
+
+    <!-- 카드 4: 셀프감금형 -->
+    <div class="type-card" id="type-4">
+      <div class="card-header" style="background: #7b1fa2;">
+        <div class="type-icon">🏠</div>
+        <div class="type-name">셀프감금형</div>
+        <div class="type-target">고령층·중장년 주의</div>
+      </div>
+      <div class="card-body">
+        <div class="fraud-quote">
+          "지금 수사 중입니다. 집에서 절대 나오지 마시고, 가족에게도 알리시면 수사에 방해됩니다. 현금을 준비해서 수거원이 가면 전달하세요."
+        </div>
+        <p class="card-desc">
+          수사기관을 사칭해 피해자를 집에 며칠씩 고립시킵니다. 가족·지인에게 알리지 못하게 한 뒤, 현금을 준비하도록 해 직접 수거합니다. 수천만~수억 원의 피해로 이어집니다. <strong>피해자 스스로 감금 상태에 있다는 인식이 없는 것이 특징입니다.</strong>
+        </p>
+        <div class="card-tip" style="background: #f3e5f5; color: #4a148c;">
+          수사기관은 절대 현금 수거를 요구하거나 집에 있으라고 지시하지 않습니다. 즉시 가족에게 알리고 112에 신고하세요.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. 자가진단 체크리스트 ===== -->
+<section id="checklist">
+  <div class="container">
+    <h2>✅ 나는 얼마나 안전한가?</h2>
+    <p class="checklist-intro">해당하는 항목을 모두 체크해보세요. 내가 보이스피싱으로부터 얼마나 안전한지 확인할 수 있습니다.</p>
+
+    <div id="check-items">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">모르는 번호로 오는 금융·수사 관련 전화는 즉시 끊는다</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">전화로 계좌번호·비밀번호·인증번호를 절대 알려주지 않는다</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">카카오톡·문자로 돈 요청이 오면 직접 전화로 본인 확인 후 송금한다</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">출처가 불명확한 문자 링크는 클릭하지 않는다</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">앱은 공식 스토어에서만 설치하고, 모르는 APK 파일은 설치하지 않는다</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">가족과 사칭 확인용 "암호(본인인증 코드)"를 정해두었다</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">수사기관이 집에 있으라거나 현금을 준비하라고 하면 사기임을 안다</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">대출 전 먼저 돈을 보내라는 요구는 사기임을 안다</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">수상한 전화·문자는 112 또는 금융감독원 1332에 신고하는 방법을 안다</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">부모님·어르신께 보이스피싱 수법을 알려드린 적이 있다</div>
+      </div>
+    </div>
+
+    <div class="result-box" id="result-box">
+      <div class="result-score" id="result-score"></div>
+      <div class="result-msg" id="result-msg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. 피해 발생시 대처법 ===== -->
+<section id="response">
+  <div class="container">
+    <h2>🚨 피해 발생 시 즉시 대처법</h2>
+    <div class="response-warning">
+      ⏱ 시간이 곧 돈입니다! 피해 직후 30분이 골든타임입니다.<br/>
+      당황하지 말고 아래 순서대로 행동하세요.
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <span class="step-urgent">즉시</span>
+          <div class="step-title">112 신고</div>
+          <div class="step-desc">경찰에 보이스피싱 피해 신고. 계좌 지급정지와 수사를 동시에 진행할 수 있습니다. 피해 경위를 차분히 설명하세요.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <span class="step-urgent">즉시</span>
+          <div class="step-title">거래 은행에 지급정지 요청</div>
+          <div class="step-desc">이체한 은행 고객센터에 전화해 "보이스피싱 피해로 지급정지 요청"을 요구하세요. 은행은 즉시 처리할 의무가 있습니다.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">금융감독원 1332 신고</div>
+          <div class="step-desc">피해 신고 및 피해금 환급 절차 안내를 받을 수 있습니다. 통신사기 피해환급법에 따라 환급 신청이 가능합니다.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">악성앱 설치 시 — 즉시 비행기 모드 전환</div>
+          <div class="step-desc">링크를 클릭하거나 앱을 설치했다면 즉시 스마트폰을 비행기 모드로 전환하세요. 악성앱이 외부 서버로 정보를 전송하는 것을 차단할 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background: #546e7a;">5</div>
+        <div class="step-content">
+          <div class="step-title">스마트폰 초기화 및 전문가 점검</div>
+          <div class="step-desc">비행기 모드 전환 후 스마트폰을 초기화하세요. 혼자 처리가 어려우면 한국인터넷진흥원(118)에 신고해 전문가 도움을 받으세요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. 신고 연락처 ===== -->
+<section id="contacts">
+  <div class="container">
+    <h2>📞 신고·지원 기관 연락처</h2>
+    <div class="contact-grid">
+      <a href="tel:112" class="contact-card emergency">
+        <div class="contact-left">
+          <div class="contact-icon">🚔</div>
+          <div>
+            <div class="contact-name">경찰청 — 범죄 신고</div>
+            <div class="contact-role">보이스피싱 신고·수사 요청</div>
+          </div>
+        </div>
+        <div class="contact-num">112</div>
+      </a>
+      <a href="tel:1332" class="contact-card">
+        <div class="contact-left">
+          <div class="contact-icon">🏦</div>
+          <div>
+            <div class="contact-name">금융감독원</div>
+            <div class="contact-role">피해 신고·지급정지·환급 신청</div>
+          </div>
+        </div>
+        <div class="contact-num">1332</div>
+      </a>
+      <a href="tel:118" class="contact-card">
+        <div class="contact-left">
+          <div class="contact-icon">💻</div>
+          <div>
+            <div class="contact-name">한국인터넷진흥원</div>
+            <div class="contact-role">악성앱·해킹·개인정보 침해</div>
+          </div>
+        </div>
+        <div class="contact-num">118</div>
+      </a>
+      <a href="tel:1301" class="contact-card">
+        <div class="contact-left">
+          <div class="contact-icon">⚖️</div>
+          <div>
+            <div class="contact-name">대검찰청 사이버수사과</div>
+            <div class="contact-role">사이버 범죄 신고</div>
+          </div>
+        </div>
+        <div class="contact-num">1301</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. 푸터 ===== -->
+<footer>
+  <div class="footer-logo">🛡️</div>
+  <strong>고양경찰서</strong><br />
+  보이스피싱 피해 예방 캠페인<br />
+  최종 업데이트: 2025년 3월<br /><br />
+  <span style="font-size:0.75rem; opacity:0.6;">이 페이지는 시민 안전을 위해 제작된 공익 안내 페이지입니다.</span>
+</footer>
+
+<!-- ===== JavaScript ===== -->
+<script>
+  /* ----- 유형 탭 전환 ----- */
+  function showType(idx) {
+    document.querySelectorAll('.type-card').forEach((c, i) => {
+      c.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.tab-btn').forEach((b, i) => {
+      b.classList.toggle('active', i === idx);
+    });
+  }
+
+  /* ----- 자가진단 체크리스트 ----- */
+  const TOTAL = 10;
+
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    updateResult();
+  }
+
+  function updateResult() {
+    const checked = document.querySelectorAll('.check-item.checked').length;
+    const box = document.getElementById('result-box');
+    const score = document.getElementById('result-score');
+    const msg = document.getElementById('result-msg');
+
+    box.className = 'result-box show';
+    score.textContent = checked + ' / ' + TOTAL + '점';
+
+    if (checked <= 5) {
+      box.classList.add('danger');
+      msg.innerHTML = '⚠️ 위험 수준입니다!<br/>보이스피싱에 매우 취약한 상태입니다. 위 유형들을 꼭 다시 읽고, 가족과 함께 예방 방법을 공유해주세요.';
+    } else if (checked <= 7) {
+      box.classList.add('warning');
+      msg.innerHTML = '⚡ 주의가 필요합니다.<br/>일부 취약점이 있습니다. 체크하지 못한 항목을 중심으로 다시 한 번 점검해보세요.';
+    } else {
+      box.classList.add('safe');
+      msg.innerHTML = '✅ 안전 수준입니다!<br/>잘 알고 계시네요. 주변 가족·어르신께도 이 페이지를 공유해 함께 안전해지세요.';
+    }
+  }
+</script>
+</body>
+</html>
